@@ -1,87 +1,191 @@
-# Testing and Debugging MERN Applications
+# MERN Bug Tracker
 
-This assignment focuses on implementing comprehensive testing strategies for a MERN stack application, including unit testing, integration testing, and end-to-end testing, along with debugging techniques.
+A comprehensive bug tracking application built with the MERN stack (MongoDB, Express.js, React, Node.js) with extensive testing and debugging capabilities.
 
-## Assignment Overview
+## Features
 
-You will:
-1. Set up testing environments for both client and server
-2. Write unit tests for React components and server functions
-3. Implement integration tests for API endpoints
-4. Create end-to-end tests for critical user flows
-5. Apply debugging techniques for common MERN stack issues
+- **Bug Management**: Create, read, update, and delete bug reports
+- **Status Tracking**: Track bug status (open, in-progress, resolved, closed)
+- **Priority Levels**: Set priority (low, medium, high, critical)
+- **Environment Details**: Capture OS, browser, device information
+- **Steps to Reproduce**: Detailed reproduction steps
+- **Tags**: Categorize bugs with custom tags
+- **Search & Filter**: Filter by status, priority, and search text
+- **Responsive Design**: Works on desktop and mobile devices
+
+## Testing & Debugging Features
+
+### Backend Testing
+- **Unit Tests**: Validation logic, utility functions
+- **Integration Tests**: API endpoints with mocked database
+- **Error Handling**: Comprehensive error middleware
+- **Debug Logging**: Development-mode request/response logging
+
+### Frontend Testing
+- **Unit Tests**: Component testing with React Testing Library
+- **Integration Tests**: User workflows and API interactions
+- **Error Boundaries**: Graceful error handling in React
+- **E2E Testing**: Cypress tests for critical user flows
+
+### Debugging Tools
+- **Console Logging**: Strategic debug logs throughout the application
+- **Chrome DevTools**: React DevTools integration
+- **Node.js Inspector**: Server-side debugging capabilities
+- **Error Tracking**: Comprehensive error reporting
 
 ## Project Structure
+mern-bug-tracker/
+├── client/ # React frontend
+├── server/ # Express.js backend
+├── tests/ # Test files
+└── README.md
 
-```
-mern-testing/
-├── client/                 # React front-end
-│   ├── src/                # React source code
-│   │   ├── components/     # React components
-│   │   ├── tests/          # Client-side tests
-│   │   │   ├── unit/       # Unit tests
-│   │   │   └── integration/ # Integration tests
-│   │   └── App.jsx         # Main application component
-│   └── cypress/            # End-to-end tests
-├── server/                 # Express.js back-end
-│   ├── src/                # Server source code
-│   │   ├── controllers/    # Route controllers
-│   │   ├── models/         # Mongoose models
-│   │   ├── routes/         # API routes
-│   │   └── middleware/     # Custom middleware
-│   └── tests/              # Server-side tests
-│       ├── unit/           # Unit tests
-│       └── integration/    # Integration tests
-├── jest.config.js          # Jest configuration
-└── package.json            # Project dependencies
-```
 
-## Getting Started
+## Installation & Setup
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week6-Assignment.md` file
-4. Explore the starter code and existing tests
-5. Complete the tasks outlined in the assignment
-
-## Files Included
-
-- `Week6-Assignment.md`: Detailed assignment instructions
-- Starter code for a MERN application with basic test setup:
-  - Sample React components with test files
-  - Express routes with test files
-  - Jest and testing library configurations
-  - Example tests for reference
-
-## Requirements
-
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (local or Atlas)
 - npm or yarn
-- Basic understanding of testing concepts
 
-## Testing Tools
+### 1. Clone the repository
+```bash
+git clone <repository-url>
+cd mern-bug-tracker
+2. Install dependencies
+bash
+# Install all dependencies (root, server, and client)
+npm run install-all
+3. Environment Setup
+Create a .env file in the server directory:
 
-- Jest: JavaScript testing framework
-- React Testing Library: Testing utilities for React
-- Supertest: HTTP assertions for API testing
-- Cypress/Playwright: End-to-end testing framework
-- MongoDB Memory Server: In-memory MongoDB for testing
+env
+NODE_ENV=development
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/bugtracker
+MONGO_URI_TEST=mongodb://localhost:27017/bugtracker_test
+JWT_SECRET=your-super-secret-jwt-key
+JWT_EXPIRE=30d
+4. Start the application
+bash
+# Development mode (both client and server)
+npm run dev
 
-## Submission
+# Or start separately
+npm run server  # Backend on http://localhost:5000
+npm run client  # Frontend on http://localhost:3000
+Testing
+Run All Tests
+bash
+npm test
+Run Specific Test Types
+bash
+# Backend tests only
+npm run test:server
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+# Frontend tests only
+npm run test:client
 
-1. Complete all required tests (unit, integration, and end-to-end)
-2. Achieve at least 70% code coverage for unit tests
-3. Document your testing strategy in the README.md
-4. Include screenshots of your test coverage reports
-5. Demonstrate debugging techniques in your code
+# Unit tests only
+npm run test:unit
 
-## Resources
+# Integration tests only
+npm run test:integration
 
-- [Jest Documentation](https://jestjs.io/docs/getting-started)
-- [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/)
-- [Supertest Documentation](https://github.com/visionmedia/supertest)
-- [Cypress Documentation](https://docs.cypress.io/)
-- [MongoDB Testing Best Practices](https://www.mongodb.com/blog/post/mongodb-testing-best-practices) 
+# End-to-end tests
+npm run test:e2e
+
+# Test coverage
+npm run test:coverage
+Test Database Setup
+bash
+cd server
+npm run setup-test-db
+Debugging Techniques
+Backend Debugging
+Console Logging: Check server console for debug logs (NODE_ENV=development)
+
+Node Inspector: Use node --inspect for debugging server code
+
+API Testing: Use Postman or curl to test endpoints directly
+
+Frontend Debugging
+React DevTools: Browser extension for component inspection
+
+Redux DevTools: State management debugging (if using Redux)
+
+Network Tab: Monitor API calls and responses
+
+Console Logs: Client-side debug logging
+
+Error Handling
+Backend: Express error middleware with detailed error responses
+
+Frontend: React Error Boundaries for component-level error handling
+
+Global Error Tracking: Centralized error reporting
+
+API Endpoints
+Bugs
+GET /api/bugs - Get all bugs (with filtering/pagination)
+
+GET /api/bugs/:id - Get single bug
+
+POST /api/bugs - Create new bug
+
+PUT /api/bugs/:id - Update bug
+
+DELETE /api/bugs/:id - Delete bug
+
+Health Check
+GET /api/health - Application health status
+
+Testing Approach
+Backend Testing Strategy
+Unit Tests: Isolated testing of middleware, validation, and utilities
+
+Integration Tests: API endpoint testing with mocked database
+
+Database Testing: In-memory MongoDB for test isolation
+
+Error Testing: Comprehensive error scenario coverage
+
+Frontend Testing Strategy
+Component Tests: Isolated testing of React components
+
+Integration Tests: User workflow testing
+
+E2E Tests: Critical path testing with Cypress
+
+Mock Service Worker: API mocking for reliable tests
+
+Code Coverage Goals
+Minimum 70% code coverage for unit tests
+
+Critical path integration test coverage
+
+E2E test coverage for main user journeys
+
+Contributing
+Fork the repository
+
+Create a feature branch
+
+Write tests for new functionality
+
+Ensure all tests pass
+
+Submit a pull request
+
+License
+MIT License - see LICENSE file for details
+
+This comprehensive MERN Bug Tracker application includes:
+
+1. **Complete Backend**: Express.js API with MongoDB, validation, error handling
+2. **React Frontend**: Modern React components with hooks and state management
+3. **Testing Suite**: Comprehensive unit, integration, and E2E tests
+4. **Debugging Features**: Error boundaries, logging, development tools
+5. **Documentation**: Complete setup and usage instructions
+
+The application demonstrates professional testing and debugging practices suitable for production use.
